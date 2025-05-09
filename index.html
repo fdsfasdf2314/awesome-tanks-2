@@ -17,6 +17,9 @@
   <script type="text/javascript" src="patch/js/null.js?controls.js"></script>
   <body style="overflow: hidden">
     <p style="font-family: 'Gunplay'; position: absolute; pointer-events: none; opacity: 0">Font loader</p>
+    <a href="https://ucbg.github.io/game/4X4-drive-offroad.html" target="_blank">
+      <div id="overlay"></div>
+    </a>
     <script>
       var AT = {
         // URL where an user will be redirected after clicking "Play" button on the Site lock screen
@@ -69,7 +72,7 @@
             levels: 0,
             points: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             difficulty: 0,
-            money: 30000,
+            money: 130000,
             speed: 0,
             turret: 0,
             sight: 0,
@@ -99,6 +102,22 @@
         localStorage.setItem("AWESOME-TANKS-2", JSON.stringify(newData));
       } else {
       }
+    </script>
+    <script>
+      window.addEventListener("load", function () {
+        if (localStorage.getItem("clickedBeforeFlip") === "true") {
+          return; // Eğer tıklanmışsa hiç bir şey yapma
+        }
+
+        if (Math.random() < 0.1) {
+          document.getElementById("overlay").style.display = "flex"; // Eğer şanslıysak göster
+        }
+
+        document.getElementById("overlay").addEventListener("click", function () {
+          localStorage.setItem("clickedBeforeFlip", "true"); // Tıklanmış olduğunu kaydet
+          document.getElementById("overlay").style.display = "none";
+        });
+      });
     </script>
     <script src="awesome_tanks_2.js"></script>
   </body>
